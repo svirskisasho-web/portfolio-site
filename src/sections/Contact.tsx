@@ -37,7 +37,8 @@ function useTurnstile(container: React.RefObject<HTMLDivElement | null>, lang: s
         sitekey: SITE_KEY,
         theme: el.closest('[data-theme]')?.getAttribute('data-theme') === 'light' ? 'light' : 'dark',
         language: lang,
-        size: 'flexible',
+        // 'flexible' needs at least 300px; very narrow phones get the compact widget so the page never scrolls sideways
+        size: el.clientWidth >= 300 ? 'flexible' : 'compact',
         callback: (t: string) => setToken(t),
         'expired-callback': () => setToken(''),
         'error-callback': () => setToken(''),

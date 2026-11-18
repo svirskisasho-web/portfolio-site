@@ -7,3 +7,8 @@ dist
 
 # Local Claude Code / editor settings
 .claude/
+
+# Never commit env files with keys
+.env
+.env.*
+!.dev.vars.example
