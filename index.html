@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sasho Svirski | Finance systems, automation & web apps</title>
+    <meta name="description" content="I turn manual finance processes and Excel sheets into automated reporting, data models and simple web apps. Also building websites for small businesses." />
+    <meta name="author" content="Sasho Svirski" />
+    <meta name="theme-color" content="#0B1A2B" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph / social preview. When you have a domain, make og:image and og:url absolute (see README). -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sasho Svirski | Finance systems, automation & web apps" />
+    <meta property="og:description" content="I turn manual finance processes and Excel sheets into automated reporting, data models and simple web apps." />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sasho Svirski: finance systems, automation and web apps" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script>
+      // Set theme before first paint to avoid a flash. Saved choice first, then system setting.
+      (function () {
+        var t = null
+        try { t = localStorage.getItem('theme') } catch (e) {}
+        if (t !== 'light' && t !== 'dark') {
+          t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+        }
+        document.documentElement.setAttribute('data-theme', t)
+      })()
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>
+      <p style="padding:2rem;font-family:sans-serif">Sasho Svirski: finance systems &amp; automation, websites &amp; web apps. Please enable JavaScript to view this site.</p>
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

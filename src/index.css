@@ -1,0 +1,143 @@
+@import 'tailwindcss';
+
+/* Dark mode is controlled by data-theme on <html> (set before paint in index.html). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #faf8f4;
+  --surface: #ffffff;
+  --ink: #0b1a2b;
+  --muted: #566476;
+  --line: rgb(11 26 43 / 0.1);
+  --line-strong: rgb(11 26 43 / 0.18);
+  --gold: #e0b04a; /* fills: buttons, bars, dots */
+  --gold-ink: #8a6312; /* gold used as text on light backgrounds (AA contrast) */
+  --on-gold: #0b1a2b;
+  --bar: rgb(11 26 43 / 0.32);
+  --positive: #1f7a4d;
+  --negative: #b4372f;
+  --tint: #f1ede4; /* soft band behind alternating sections */
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #0b1a2b;
+  --surface: #0f2236;
+  --ink: #e9eef4;
+  --muted: #98a6b7;
+  --line: rgb(233 238 244 / 0.09);
+  --line-strong: rgb(233 238 244 / 0.18);
+  --gold: #e0b04a;
+  --gold-ink: #e0b04a;
+  --on-gold: #0b1a2b;
+  --bar: rgb(233 238 244 / 0.34);
+  --positive: #5cc28c;
+  --negative: #ef8a7f;
+  --tint: #0e2033;
+  color-scheme: dark;
+}
+
+/* Navy 'inverse' bands: always dark. In dark mode they go one step deeper so they still stand out. */
+:root[data-theme='dark'] [data-band='inverse'] {
+  --bg: #07111c;
+  --surface: #0c1b2b;
+}
+
+@theme inline {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-gold: var(--gold);
+  --color-gold-ink: var(--gold-ink);
+  --color-on-gold: var(--on-gold);
+  --color-bar: var(--bar);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --color-tint: var(--tint);
+}
+
+/* ---------- Base ---------- */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+::selection {
+  background: var(--gold);
+  color: var(--on-gold);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero entrance */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.rise { animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.rise-1 { animation-delay: 0.05s; }
+.rise-2 { animation-delay: 0.15s; }
+.rise-3 { animation-delay: 0.28s; }
+.rise-4 { animation-delay: 0.4s; }
+
+/* Gentle float for the hero cards */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float { animation: float 7s ease-in-out infinite; }
+.float-late { animation-delay: -3.5s; }
+
+/* Tools strip */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 80s linear infinite; }
+.marquee-wrap:hover .marquee { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee, .float { animation: none !important; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+
+/* Remove number-input spinners in the demo */
+.cell-input::-webkit-outer-spin-button,
+.cell-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }

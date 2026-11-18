@@ -1,0 +1,8 @@
+# Copy this file to .dev.vars for local testing (never commit .dev.vars).
+# In production, set these as encrypted secrets in Cloudflare Pages > Settings > Variables and Secrets.
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxx
+CONTACT_TO_EMAIL=you@example.com
+# Until your domain is verified in Resend, use: Portfolio <onboarding@resend.dev>
+CONTACT_FROM_EMAIL=Portfolio <onboarding@resend.dev>
+# Cloudflare Turnstile secret. This is Cloudflare's public "always passes" test key for local development:
+TURNSTILE_SECRET_KEY=1x0000000000000000000000000000000AA
